@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../../pages/loginPage';
+import { testUsers } from '../../test-data/users';
 
 test.describe('Login', () => {
     let loginPage: LoginPage;
@@ -10,7 +11,7 @@ test.describe('Login', () => {
     });
 
     test('should login with valid credentials', async ({ page }) => {
-        await loginPage.login('test@test.com', 'Test1234!');
+        await loginPage.login(testUsers.standard.email, testUsers.standard.password);
         await expect(page).toHaveURL('/#/search')
     })
 })
