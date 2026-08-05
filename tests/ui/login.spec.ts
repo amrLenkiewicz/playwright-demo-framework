@@ -14,4 +14,13 @@ test.describe('Login', () => {
         await loginPage.login(testUsers.standard.email, testUsers.standard.password);
         await expect(page).toHaveURL('/#/search')
     })
+
+    test('should login button should be disabled if inputs are empty', async ({ page }) => {
+        expect(await loginPage.isLoginButtonDisabled()).toBe(true);
+    })
+
+    test('should error appear if wrong password', async ({ page }) => {
+        await loginPage.login(testUsers.standard.email, 'dupa123');
+        expect(await loginPage.getErrorMessage()).toBe('Invalid email or password.');
+    })
 })

@@ -8,6 +8,7 @@ export class LoginPage {
     private readonly forgotPasswordLink: Locator;
     private readonly notYetACustomerLink: Locator;
     private readonly loginWithGoogle: Locator;
+    private readonly wrongEmailOrPass: Locator;
 
     constructor(private readonly page: Page) {
         this.emailInput = page.getByLabel('Email');
@@ -17,6 +18,7 @@ export class LoginPage {
         this.forgotPasswordLink = page.getByRole('link', { name: 'Forgot your password?' });
         this.notYetACustomerLink = page.getByRole('link', { name: 'Not yet a customer?' });
         this.loginWithGoogle = page.getByRole('button', { name: 'Log in with Google' });
+        this.wrongEmailOrPass = page.getByText('Invalid email or password.');
     }
 
     async goToLogin() {
@@ -47,5 +49,13 @@ export class LoginPage {
 
     async uncheckRememberMe() {
         await this.rememberMeCheckbox.uncheck()
+    }
+
+    async isLoginButtonDisabled(): Promise<boolean> {
+        return await this.loginButton.isDisabled();
+    }
+
+    async getErrorMessage(): Promise<string> {
+        return await this.wrongEmailOrPass.innerText();
     }
 }
