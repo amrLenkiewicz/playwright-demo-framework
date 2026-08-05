@@ -10,10 +10,9 @@ export class LoginPage {
     private readonly loginWithGoogle: Locator;
 
     constructor(private readonly page: Page) {
-        this.page = page
         this.emailInput = page.getByLabel('Email');
-        this.passwordInput = page.getByLabel('Password');
-        this.loginButton = page.getByRole('button', { name: 'Log in' });
+        this.passwordInput = page.getByRole('textbox', { name: 'Text field for the login password' });
+        this.loginButton = page.locator('#loginButton');
         this.rememberMeCheckbox = page.getByLabel('Remember me');
         this.forgotPasswordLink = page.getByRole('link', { name: 'Forgot your password?' });
         this.notYetACustomerLink = page.getByRole('link', { name: 'Not yet a customer?' });
