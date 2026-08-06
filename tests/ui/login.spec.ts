@@ -20,7 +20,7 @@ test.describe('Login', () => {
     })
 
     test('should error appear if wrong password', async ({ page }) => {
-        await loginPage.login(testUsers.standard.email, 'dupa123');
+        await loginPage.login(testUsers.standard.email, 'zlehaslo123');
         expect(await loginPage.getErrorMessage()).toBe('Invalid email or password.');
     })
 })

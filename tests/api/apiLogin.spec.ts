@@ -16,4 +16,18 @@ test.describe('Testing login endpoint', () => {
         expect(responseBody.authentication.token).toBeTruthy();
         expect(responseBody.authentication.umail).toBe(testUsers.standard.email);
     })
+
+    test('should not login via API with invalid password', async ({ request }) => {
+        const response = await request.post('/rest/user/login', {
+            data: {
+                email: testUsers.standard.email,
+                password: 'zlehaslo123'
+            }
+        });
+
+        expect(response.status()).toBe(401);
+
+        const responseBody = await response.text();
+        expect(responseBody).toBe('Invalid email or password.');
+    })
 })
